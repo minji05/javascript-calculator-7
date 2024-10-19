@@ -18,10 +18,12 @@ class App {
     }
 
     if (input.includes(',') || input.includes(':')) {
-      Console.print('쉼표(,) 또는 콜론(:)이 포함된 문자열입니다.');
+      const numbers = input.split(/[, :]/).map(Number);
+      const validNumbers = numbers.filter(num => !Number.isNaN(num));
+
+      Console.print(`분리된 숫자: ${validNumbers.join(', ')}`);
       return;
     }
-
     Console.print('쉼표(,) 또는 콜론(:)이 포함되지 않은 문자열입니다.');
   }
 }
