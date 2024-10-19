@@ -17,14 +17,29 @@ class App {
       return;
     }
 
-    if (input.includes(',') || input.includes(':')) {
-      const numbers = input.split(/[, :]/).map(Number);
-      const validNumbers = numbers.filter(num => !Number.isNaN(num));
+    const validNumbers = App.getValidNumbers(input);
 
-      Console.print(`분리된 숫자: ${validNumbers.join(', ')}`);
-      return;
+    App.printSumOrNumber(validNumbers);
+  }
+
+  static getValidNumbers(input) {
+    return input
+      .split(/[, :]/)
+      .map(Number)
+      .filter(num => !Number.isNaN(num));
+  }
+
+  static printSumOrNumber(numbers) {
+    if (numbers.length === 1) {
+      Console.print(numbers[0]);
+    } else {
+      const sum = App.sumNumbers(numbers);
+      Console.print(sum);
     }
-    Console.print('쉼표(,) 또는 콜론(:)이 포함되지 않은 문자열입니다.');
+  }
+
+  static sumNumbers(numbers) {
+    return numbers.reduce((acc, curr) => acc + curr, 0);
   }
 }
 
