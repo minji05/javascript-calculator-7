@@ -1,45 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
-  static async run() {
-    const input = await App.getUserInput();
-    App.printResult(input);
+  async run() {
+    const input = await this.getUserInput();
+    this.printResult(input);
   }
 
+  // 사용자에게 입력을 받는 메서드
   static async getUserInput() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
     return input;
   }
 
   static printResult(input) {
-    if (!input || !input.trim()) {
-      Console.print(0);
-      return;
-    }
-
-    const validNumbers = App.getValidNumbers(input);
-
-    App.printSumOrNumber(validNumbers);
-  }
-
-  static getValidNumbers(input) {
-    return input
-      .split(/[, :]/)
-      .map(Number)
-      .filter(num => !Number.isNaN(num));
-  }
-
-  static printSumOrNumber(numbers) {
-    if (numbers.length === 1) {
-      Console.print(numbers[0]);
-    } else {
-      const sum = App.sumNumbers(numbers);
-      Console.print(sum);
-    }
-  }
-
-  static sumNumbers(numbers) {
-    return numbers.reduce((acc, curr) => acc + curr, 0);
+    Console.print(`입력한 문자열: ${input}`);
   }
 }
 
